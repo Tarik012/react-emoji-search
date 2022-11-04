@@ -26,7 +26,7 @@ const Search = (props) => {
   // Variable contenant la fonction déclenchée à la saisie sur le onChange
   const searchItems = (value) => {
     // contenu de ma fonction qui récupère la valeur de recherche saisie et la passe à la fonction qui change son état
-    console.log("valeur de recherche =>", value);
+    //console.log("valeur de recherche =>", value);
     setInput(value); // je passe ma valeur au changement d'état dans le hook useState
     if (input !== "") {
       // s'il y a une saisie, je filtre mon objet data (fichier data.json) sur la valeur saisie 'input' en comparant avec les mots-clés
@@ -37,9 +37,9 @@ const Search = (props) => {
           .includes(input.toLowerCase());
       });
       setFilteredResults(filteredData); // je mets le résultat de ma recherche dans l'état 'filteredData'
-      console.log("filteredData =>", filteredData);
+      //console.log("filteredData =>", filteredData);
     } else {
-      setFilteredResults(dataJson); // sinon mon résultat correspond au fichier data.json
+      setDataJson(dataJson.slice(0, 20)); // sinon mon résultat correspond au 20 premières lignes du fichier data.json
       console.log("dataJson =>", dataJson);
     }
   };
@@ -63,7 +63,7 @@ const Search = (props) => {
         }}
       ></input>
 
-      {setInput.length > 0
+      {setInput.length >= 0
         ? filteredResults.map((item, index) => {
             return <Line key={index} title={item.title} symbol={item.symbol} />;
           })
